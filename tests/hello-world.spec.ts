@@ -1,13 +1,35 @@
 import { test, expect } from '@playwright/test';
 
 test('Testa a página de Hello World do Vaadin', async ({ page }) => {
-  // Substitua pelo URL onde seu projeto Vaadin está rodando (por exemplo, localhost:8080 ou o deploy na nuvem)
+  // Acessa a página principal do projeto Vaadin
   await page.goto('http://localhost:8080');
 
-  // Verifica se o título da página é o esperado (ajuste o título para o valor correto)
   await expect(page).toHaveTitle('###Project Name###'); // Ajuste conforme o título atual
 
-  // Verifica se o texto "Hello World" está presente na página
-  const helloText = await page.locator('h1');
-  await expect(helloText).toHaveText('Hello World'); // Se você quer verificar o texto "Hello World"
+  // Verifica se o campo de texto para "Your name" está presente na página
+  const textField = await page.locator('text="Your name"');
+  await expect(textField).toBeVisible();
+
+  // Verifica se o botão "Say hello" está presente e é clicável
+  const button = await page.locator('text="Say hello"');
+  await expect(button).toBeVisible();
+  await expect(button).toBeEnabled();
+
+  // Insere um nome no campo de texto
+  await textField.fill('John');
+
+  // Clica no botão "Say hello"
+  await button.click();
+
+  // Verifica se a saudação correta é exibida
+  const greetingText = await page.locator('text="Hello John"');
+  await expect(greetingText).toBeVisible();
+
+  // Testa com o campo vazio
+  await textField.fill('');
+  await button.click();
+
+  // Verifica se a saudação para usuário anônimo é exibida
+  const anonymousGreeting = await page.locator('text="Hello anonymous user"');
+  await expect(anonymousGreeting).toBeVisible();
 });
