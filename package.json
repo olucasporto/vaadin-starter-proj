@@ -1,0 +1,15 @@
+{
+  "name": "vaadin-starter-proj",
+  "version": "1.0.0",
+  "description": "This project can be used as a starting point to create your own Vaadin application with Spring Boot. It contains all the necessary configuration and some placeholder files to get you started.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.47.1"
+  }
+}
